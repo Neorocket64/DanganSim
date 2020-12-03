@@ -5,7 +5,7 @@ This is **dangan simulator**, where it uhhhhh generates(?) a sequence of events 
 *what this use for?* uhhh create certain school killing scenario? you can spruce up your imagination with this, or uhh having fun with possibilities of your friends dying inside school killing game or somethin idk :(
 
 This app is made in python with [guizero](https://lawsie.github.io/guizero/about/) library (cause i suck at GUI programming)
-By yours truly, agarpac!
+by yours truly, agarpac!
 
 Some script writeups and sequences based on this [replit talk](https://repl.it/talk/share/Danganronpa-simulator/6602)
 I greatly thankful to him for giving me ideas '3'/
@@ -63,6 +63,7 @@ Otherwise it'll be included in the app as part of the list!
 
 
 ## Notes
+- how i implemented this is pretty horrible and due to the nature of guizero, the size is fixed within set pixels there's nothing i can do about it normally
 
 - if there's an update, i might add, modify, or remove lines from assets to my liking
 
