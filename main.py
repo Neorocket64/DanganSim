@@ -61,6 +61,7 @@ size_icon = (100, 100)
 size_clue = (50, 50)
 text1 = Text(title_box, text="DanganSim : School succ", size=14, color="red", bg="orange", font="Arial")
 
+# check if the image has animation
 def hasanimation(image):
     try:
         image.seek(1)
@@ -68,18 +69,23 @@ def hasanimation(image):
     except EOFError:
         return False
 
+# reading image and return with image object from PIL(LOW)
 def read_asimage(filename, emboss):
     im = Image.open(filename)
     im.load()
     filetype = im.format
+    # why RGBA? some needs like alpha compositing, so i'll just make all image in RGBA mode
     im = im.convert("RGBA")
     animated_format = ["GIF", "APNG"]
+    # should only seek frames instead, but i remember there's certain format that used frames as layer so just to make sure????
     if any(x in filetype for x in animated_format) and hasanimation(im):
         im.seek(0)
+    # originally used for dead person, but using overlay instead so it's redundant now
     if emboss:
         im = im.filter(ImageFilter.EMBOSS)
     return im
 
+# reading txt file and return as list of strings
 def readas_list(filename):
     linelist = []
     with open(filename, "r") as file_read:
@@ -88,17 +94,23 @@ def readas_list(filename):
             linelist.append(x.rstrip("\n"))
     return linelist
 
+# here we go. in guizero, you can basically destroy their own object using destroy()
+# content_list is a list of created guizero objects that i can destroy all in 1 go whenever i want (usually as first function of every screen functions)
+# unfortunately i don't have enough will to check if destroy means destroy whole object or just functionality (there's active option so might be 1st one)
+# and so i also clear the list to make sure there's no empty object inside
 def clean_contentlist():
     if len(content_list) >= 1:
         for x in content_list:
             x.destroy()
         content_list.clear()
 
+# wrapping text (thnx python)
 def text_wrap(text):
     if len(text) > wrap_width:
         return textwrap.fill(text, wrap_width)
     else: return text
 
+# punishment screen
 def play_punish(choosen):
     clean_contentlist()
 
@@ -129,6 +141,7 @@ def play_punish(choosen):
     content_list.append(Text(content_box, font="Constantia", text="Trial : Punishment", grid=[0,0], size=12, color ="red", width="fill"))
     content_list.append(PushButton(content_box, text="Continue", grid=[0,7], command=play_chapterstart))
 
+# voting screen
 def play_vote():
     clean_contentlist()
     playerpos_x = 0
@@ -184,10 +197,10 @@ def play_vote():
     else:
         choosen = random.choice(choosen_bag)
 
-    # random initialize event counter
     content_list.append(Text(content_box, font="Constantia", text="Trial : Voting", grid=[0,0,text_pos,1], size=12, color ="blue", width="fill"))
     content_list.append(PushButton(content_box, text="Continue", grid=[0,playerpos_y+5,text_pos,1], command=lambda: play_punish(choosen)))
 
+# clue findings screen
 def play_clue():
     clean_contentlist()
     content_list.append(Text(content_box, font="Constantia", text="Trial : Clue findings", grid=[0,0,3,1], size=12, color ="blue", width="fill"))
@@ -235,6 +248,7 @@ def play_clue():
     content_list.append(Text(content_box, text="After some discussions, here's the list of possible clues:", grid=[0,1,3,1], size=10, color="blue"))
     content_list.append(PushButton(content_box, text="Continue", grid=[0,playerpos_y+1,3,1], command=play_vote))
 
+# investigate screen
 def play_investigate():
     global coolcounter
     clean_contentlist()
@@ -264,13 +278,14 @@ def play_investigate():
 
     content_list.append(Text(content_box, font="Constantia", text="Investigating", grid=[0,0,place_x,1], size=12, color ="blue", width="fill"))
 
+# recently killed screen
 def play_killed():
     global coolcounter
     clean_contentlist()
     playerpos_x = 0
     index = 0
     for x in chara_list:
-        # print(x.status)
+        # shows only recently killed
         if x.status == 2:
             # print(x.image)
             imageded = read_asimage(x.image, 0).resize(size_icon, Image.LANCZOS)
@@ -286,6 +301,7 @@ def play_killed():
 
     content_list.append(Text(content_box, font="Chiller", text="Killed!", grid=[0,0,playerpos_x,1], size=18, color ="red", width="fill"))
 
+# randomize within range
 def kill_roulette():
     x1, x2 = 50, 85
     roulette = random.randint(1,100)
@@ -297,13 +313,19 @@ def kill_roulette():
         kill = 3
     return kill
 
+# calculation on who to die
 def play_decidekill():
     remain_to_kill = survivecount - survivors - 1
     # print("remainings to kill -> " + str(remain_to_kill))
     # check if it's possible to kill up to 3 people 
-    # print(remain_to_kill)
     if remain_to_kill > 3:
         kill = kill_roulette()
+        # cool, now imagine 4 target survivors and there's 7 remaining atm
+        # so it should have 3 remainings to kill
+        # with that, now imagine the system decided to kill 1 person
+        # that means 2 people left. after kill the culprit after, it'll turn into 1 person left
+        # see the problem? next time it'll be 5 survivors remaining, which is bad
+        # with this, shouldn't purely randomized so no error!
         while (remain_to_kill - kill == 1):
             kill = kill_roulette()
         # print("final kill"+str(kill))
@@ -320,6 +342,7 @@ def play_decidekill():
         chara_list[kill_index].status = 2
     play_killed()
 
+# event (and motivation showin) screen
 def play_event():
     global coolcounter
     clean_contentlist()
@@ -366,6 +389,8 @@ def play_event():
 
     content_list.append(Text(content_box, font="Constantia", text="Events", grid=[0,0,place_x,1], size=12, color ="blue", width="fill"))
 
+# clean all the list.... idk why i have to do this tbh i prob only need things like character list
+# and resetting chapter count to 0 (since it's always incrementing after chapter)
 def play_cleanfinish():
     global chaptercount
     chara_list.clear()
@@ -383,6 +408,7 @@ def play_cleanfinish():
     chaptercount = 0
     menu_main()
 
+# final survivors screen
 def play_finish():
     clean_contentlist()
     index = 0
@@ -400,11 +426,11 @@ def play_finish():
             if text_pos <= 5:
                 text_pos += 1
         index += 1
-    # random initialize event counter
     content_list.append(Text(content_box, text="Chapter" + str(chaptercount), grid=[0,0,text_pos,1], size=10, color ="blue", width="fill"))
     content_list.append(Text(content_box, text="Here are survivors", grid=[0,1,text_pos,1], size=10, color ="orange", width="fill"))
     content_list.append(PushButton(content_box, text="Finish", grid=[0,playerpos_y+4,5,1], command=play_cleanfinish))
 
+# chapter start screen
 def play_chapterstart():
     global chaptercount, survivecount, coolcounter
     clean_contentlist()
@@ -438,6 +464,7 @@ def play_chapterstart():
     else:
         content_list.append(PushButton(content_box, text="Continue", grid=[0,playerpos_y+3,5,1], command=play_event))
 
+# saving function for editor screen
 def edit_save(index, n, g, u, i):
     regex = re.compile("[^\w\d\s@#]")
     if n == "" or u == "":
@@ -454,14 +481,18 @@ def edit_save(index, n, g, u, i):
     chara_list[index].ultimate = u 
     play_charalist()
 
+# canceling function
 def edit_cancel(index, mode):
     if mode == 0:
+        # since i made instance first for create mode, i need to pop it off
         chara_list.pop(-1)
     play_charalist()
 
+# updating image preview
 def update_imageprev(value):
     content_list[1].image = read_asimage(value, 0).resize(size_icon, Image.LANCZOS)
 
+# chara editor screen
 def play_charaeditor(index, mode):
     clean_contentlist()
     imagelist = []
@@ -488,17 +519,21 @@ def play_charaeditor(index, mode):
 
     content_list.append(Text(content_box, text="NOTE: Only alphanumeric and underscore (_) allowed for input!", grid=[0,6,2,1], size=10, color ="red", width="fill"))
 
+# make new instance of the character
 def player_create():
     chara_list.append(Chara("",0,"",imagedefault))
     play_charaeditor(chara_list.index(chara_list[-1]), 0)
 
+# just throw in to her house since locked
 def player_edit(index):
     play_charaeditor(index, 1)
 
+# removal of character tru menu. apparently works
 def player_remove(index):
     chara_list.pop(index)
     play_charalist()
 
+# updating preview charalist
 def update_charalist(value):
     regex = re.compile("\d+;")
     index = int(regex.search(value).group().strip(";"))
@@ -509,10 +544,12 @@ def update_charalist(value):
     content_list[1].value = str(index)
     # print(chara_list)
 
+# updating survivor's number
 def update_survivor(value):
     global survivors
     survivors = int(value)
 
+# checking how many charas
 def check_enoughchara():
     global chaptercount
     if len(chara_list) < 8:
@@ -525,6 +562,7 @@ def check_enoughchara():
         chaptercount = 0
         play_chapterstart()
 
+# abandon
 def play_abandon():
     global chaptercount
     if app.yesno("Confirmation", "Are you sure you want to abandon the sim?\n(Character list will be wiped out clean)"):
@@ -545,6 +583,7 @@ def play_abandon():
     else:
         return
 
+# checking formats inside
 def assert_format(file_name):
     regex = re.compile("[^\w\d\s@#]")
     format_list = [".gif", ".png", ".jpg", ".jpeg", ".bmp"]
@@ -571,6 +610,7 @@ def assert_format(file_name):
             index = 0
     return True
 
+# importing list of charas
 def chara_import():
     file_name = app.select_file(filetypes=[["CSV documents", "*.csv"]])
     if file_name == "" or file_name == None:
@@ -587,6 +627,7 @@ def chara_import():
         app.info("Failed", "failed to import the file...")
     play_charalist()
 
+# exporting list of charas
 def chara_export():
     if len(chara_list) <= 0:
         app.warn("Empty list?", "No. Why you want to save empty list?")
@@ -604,6 +645,7 @@ def chara_export():
             app.info("Saved", "successfully saved the list!")
     play_charalist()
 
+# character screen out of me
 def play_charalist():
     global survivors
     clean_contentlist()
@@ -638,6 +680,7 @@ def play_charalist():
     content_list.append(Text(content_box, text="Character List", grid=[0,1], size=10, color ="blue", align="bottom"))
     content_list.append(Text(content_box, text="Note : Minimum for charas are 8 and maximum are 20!", grid=[0,9,3,1], size=10, color ="red", align="bottom"))
 
+# inserting texts into list
 def play_initialize():
     event1_list.extend(readas_list("asset/event1.txt"))
     event2_list.extend(readas_list("asset/event2.txt"))
@@ -652,12 +695,14 @@ def play_initialize():
     punish_list.extend(readas_list("asset/punishment.txt"))
     play_charalist()
 
+# to the menu screen
 def go_mainmenu(listpos, mode):
     if not mode:
         content_list.append(PushButton(content_box, text="Menu", grid=listpos, command=menu_main))
     else:
         content_list.append(PushButton(content_box, text="Menu", grid=listpos, command=play_abandon))
 
+# main menu screen
 def menu_main():
     clean_contentlist()
     content_list.append(PushButton(content_box, text="Prepare Simulation", grid=[0,0,2,1], command=play_initialize, width="fill"))
@@ -665,6 +710,7 @@ def menu_main():
     content_list.append(PushButton(content_box, text="Motive", grid=[1,1], command=prev_motive, width="fill"))
     content_list.append(Picture(content_box, image=read_asimage(imagedefault, True), grid=[0,2,2,1]))
 
+# update text values
 def update_preview(value):
     if "{0}" in value:
         replacement = value
@@ -675,6 +721,7 @@ def update_preview(value):
     else:
         content_list[1].value = value
 
+# preview punishment
 def prev_punishment():
     clean_contentlist()
     punish = readas_list("asset/punishment.txt")
@@ -685,6 +732,7 @@ def prev_punishment():
     content_list.append(ListBox(content_box, scrollbar=True, items=punish, command=update_preview, grid=[0,1,2,1], width="fill"))
     go_mainmenu([0,3,2,1], False)
 
+# preview motive
 def prev_motive():
     clean_contentlist()
     motive = readas_list("asset/motive.txt")
