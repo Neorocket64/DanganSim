@@ -1,0 +1,8 @@
+dist/
+build/
+.vscode/
+# this is specifically my stuffs
+player/*
+!player/default.png
+*.csv
+setup.py

@@ -1,0 +1,20 @@
+cafeteria
+electrical room
+{0}'s room
+{1}'s room
+gymnasium
+podium
+class
+swimming pool
+head master's room
+hallway
+storage room
+garden
+pool inside garden
+computer room
+school's balchony
+teacher's lounge
+multimedia room
+shower room
+girl's bathroom
+boy's bathroom

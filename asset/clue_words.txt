@@ -1,0 +1,11 @@
+{0} sleep at the entire time of the murder
+{0} saw {1} coming from murder scene
+{0} got heated conversation with the deceased while ago
+Others decided that {0} was acting suspicious at the time of murder
+{0} said that {1} is acting suspicious during debate
+Others still didn't know {0}'s whereabout at the time of the murder
+{0} denied their allegation about murder weapon belonged to {0}
+{0} denied {1}'s allegation about murder weapon belonged to {0}
+{0} has alibi with {1} doing unrelated
+Got a clue that incriminated {0}
+{0} has alibi with innocents

@@ -1,0 +1,14 @@
+{0}, {1}, and {2} had a tea party in the dining hall
+{0}, {1}, and {2} tried to find a way out of school
+{0}, {1}, and {2} watched anime in the av room
+{0}, {1}, and {2} explored the school
+{0}, {1}, and {2} chatted in the gym
+{0}, {1}, and {2} had a sleepover
+{0} got injured. {1} and {2} came to help {0}
+{0} got bullied by {1} and {2}
+{0} stopped {1} and {2}'s dangerous action
+{0} and {1} found {2} crying inside a closet
+{0}, {1}, and {2} got lost in the school
+{0}, {1}, and {2} partied together until night
+{0} stopped {1}'s bullying to {2}
+{0}, {1}, and {2} planned something together

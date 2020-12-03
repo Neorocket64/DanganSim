@@ -1,0 +1,16 @@
+{0} having alone time in {0}'s own room
+{0} plotted something
+{0} sleep in {0}'s own room
+{0} explore the school alone
+{0} investigating found clue
+{0} were nowhere to be seen for a while
+{0} got nothing to do and decided to prank other students
+{0} got a fight with the rest of students
+{0} passed out from excess panicking
+{0} cried in the corner
+{0} took a bath
+{0} tired with this school killing
+{0} took a nap inside cafeteria
+{0} took fishing on pool in the garden
+{0} got caught doing something dangerous
+{0} got caught bringing dangerous weapon

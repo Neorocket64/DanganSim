@@ -1,0 +1,10 @@
+{0} found a clue around the crime scene
+{0} thought that something was off about certain person
+everyone discussed of possibilities
+culprit hid the clue away
+{0} thought found a clue, but ended up as a dud
+everyone found a clue around the crime scene
+culprit thought way out to take a blame to someone
+{0} watched over others
+others didn't know where was {0} at the time of murder
+{0} seems suspicious...

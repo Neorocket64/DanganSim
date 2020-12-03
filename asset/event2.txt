@@ -1,0 +1,19 @@
+{0} and {1} watched a movie together in the av studio
+{0} and {1} had dinner together in the dining hall
+{0} and {1} went to explore the school
+{0} and {1} hung out in the gym
+both {0} and {1} planned to find the culprit
+{0} and {1} chatted in {1}'s room
+{0} and {1} made food for the other students
+{0} and {1} seemed to get along pretty well
+{0} was fighting with {1} for some reason
+{0} and {1} didn't get along well
+{0} pulled a prank to {1}
+{0} secretly observing {1}
+{0} bullied {1}
+{0} had breakfast together with {1}
+{0} had lunch together with {1}
+{0} had dinner together with {1}
+{0} irritated by {1}'s behaviours
+{0} put a stop to {1}'s suicide attempt
+{0} helped {1} doing something
