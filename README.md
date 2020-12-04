@@ -1,5 +1,12 @@
 # DanganSim
 
+![alt text][ss1] ![alt text][ss2] ![alt text][ss3] ![alt text][ss4]
+
+[ss1]: ../blob/main/doc/ss1.png "Character list"
+[ss2]: ../blob/main/doc/ss2.png "Oh oh some people died"
+[ss3]: ../blob/main/doc/ss3.png "Possible clues"
+[ss4]: ../blob/main/doc/ss4.png "Voting"
+
 This is **dangan simulator**, where it uhhhhh generates(?) a sequence of events replicating original game, danganronpa
 
 *what this use for?* uhhh create certain school killing scenario? you can spruce up your imagination with this, or uhh having fun with possibilities of your friends dying inside school killing game or somethin idk :(
@@ -15,11 +22,18 @@ I greatly thankful to him for giving me ideas '3'/
 
 - View motives and punishments (idk why i added this)
 
+- Character editor to put it into list
+
 - Export import list (so you don't always need to create same set characters every time)
 
 
 ## SETTING UP and MODIFYING:
 
+### Prequisite for running the release
+
+I only built it for Windows (86x) using cx_Freeze.
+
+What you need to run the exec is having **Visual C++ Redistributable for Visual Studio (2015 or 2017)** installed
 
 ### Prequisite for running the code
 
@@ -28,6 +42,8 @@ You only need guizero which you can do with:
 or refer to this [installation guide](https://lawsie.github.io/guizero/)
 
 using `pip` instead of others will also install [PILLOW](https://pillow.readthedocs.io/en/latest/index.html) which is really needed for image load
+
+if not, do `pip install Pillow`
 
 
 ### Picture for characters
