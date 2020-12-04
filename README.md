@@ -2,10 +2,10 @@
 
 ![alt text][ss1] ![alt text][ss2] ![alt text][ss3] ![alt text][ss4]
 
-[ss1]: ../blob/main/doc/ss1.png "Character list"
-[ss2]: ../blob/main/doc/ss2.png "Oh oh some people died"
-[ss3]: ../blob/main/doc/ss3.png "Possible clues"
-[ss4]: ../blob/main/doc/ss4.png "Voting"
+[ss1]: ./doc/ss1.png "Character list"
+[ss2]: ./doc/ss2.png "Oh oh some people died"
+[ss3]: ./doc/ss3.png "Possible clues"
+[ss4]: ./doc/ss4.png "Voting"
 
 This is **dangan simulator**, where it uhhhhh generates(?) a sequence of events replicating original game, danganronpa
 
