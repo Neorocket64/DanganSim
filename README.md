@@ -1,11 +1,6 @@
 # DanganSim
 
-![alt text][ss1] ![alt text][ss2] ![alt text][ss3] ![alt text][ss4]
-
-[ss1]: ./doc/ss1.png "Character list"
-[ss2]: ./doc/ss2.png "Oh oh some people died"
-[ss3]: ./doc/ss3.png "Possible clues"
-[ss4]: ./doc/ss4.png "Voting"
+<img src="./doc/ss1.png" alt="Character selection" width="40%" height="40%"> <img src="./doc/ss2.png" alt="Who got killed?" width="40%" height="40%"> <img src="./doc/ss3.png" alt="Possible clues" width="40%" height="40%"> <img src="./doc/ss4.png" alt="Voting" width="40%" height="40%">
 
 This is **dangan simulator**, where it uhhhhh generates(?) a sequence of events replicating original game, danganronpa
 
