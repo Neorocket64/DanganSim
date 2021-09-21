@@ -235,6 +235,9 @@ def play_clue():
             message_clue = message_clue.format(random.choice(chara_event))
             pic1 = chara_image[0]
             pic2 = icon_invest
+        else:
+            pic1 = icon_invest
+            pic2 = icon_invest
         
         content_list.append(Picture(content_box, image=read_asimage(pic1, 0).resize(size_clue, Image.LANCZOS), grid=[0,playerpos_y]))
         content_list.append(Text(content_box, text=text_wrap(message_clue), grid=[1,playerpos_y], size=10, color="black"))
